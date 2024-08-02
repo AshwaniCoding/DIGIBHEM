@@ -988,7 +988,7 @@
                           <Color blue="19" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/banking/images/Home.png"/>
+                          <Image iconType="3" name="/images/Home.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value=" Home"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1005,7 +1005,7 @@
                           <Color blue="19" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/banking/images/Money Bag Rupee.png"/>
+                          <Image iconType="3" name="/images/Money Bag Rupee.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value=" Account"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1022,7 +1022,7 @@
                           <Color blue="19" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/banking/images/Initiate Money Transfer.png"/>
+                          <Image iconType="3" name="/images/Initiate Money Transfer.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value=" Transfer"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1039,7 +1039,7 @@
                           <Color blue="19" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/banking/images/Payment History.png"/>
+                          <Image iconType="3" name="/images/Payment History.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value=" Transactions"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1056,7 +1056,7 @@
                           <Color blue="19" green="0" red="33" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/banking/images/icons8_logout_14px.png"/>
+                          <Image iconType="3" name="/images/icons8_logout_14px.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Logout"/>
                       </Properties>
@@ -1093,15 +1093,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="welcomeName" alignment="3" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="welcomeName" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                      <Component id="jLabel67" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="3" attributes="0">
-                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                      <Component id="dateLabel" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel67" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="dateLabel" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -1249,7 +1248,7 @@
                                 <Component class="javax.swing.JLabel" name="jLabel30">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_100%_100px.png"/>
+                                      <Image iconType="3" name="/images/icons8_100%_100px.png"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -1295,7 +1294,7 @@
                                 <Component class="javax.swing.JLabel" name="jLabel57">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_protect_30px.png"/>
+                                      <Image iconType="3" name="/images/icons8_protect_30px.png"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -1393,7 +1392,7 @@
                                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                     </Property>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_eye_14px.png"/>
+                                      <Image iconType="3" name="/images/icons8_eye_14px.png"/>
                                     </Property>
                                     <Property name="text" type="java.lang.String" value="Show balance"/>
                                   </Properties>
@@ -1412,7 +1411,7 @@
                                 <Component class="javax.swing.JLabel" name="homeAccountIconLabel">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_merchant_account_20px.png"/>
+                                      <Image iconType="3" name="/images/icons8_merchant_account_20px.png"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -1563,7 +1562,7 @@
                                 <Component class="javax.swing.JLabel" name="jLabel68">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_transaction_20px.png"/>
+                                      <Image iconType="3" name="/images/icons8_transaction_20px.png"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -1663,7 +1662,7 @@
                                 <Component class="javax.swing.JLabel" name="jLabel44">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_protect_20px.png"/>
+                                      <Image iconType="3" name="/images/icons8_protect_20px.png"/>
                                     </Property>
                                   </Properties>
                                   <Constraints>
@@ -1779,7 +1778,7 @@
                                 <Component class="javax.swing.JLabel" name="accountEditOption">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/com/banking/images/icons8_edit_user_20px.png"/>
+                                      <Image iconType="3" name="/images/icons8_edit_user_20px.png"/>
                                     </Property>
                                   </Properties>
                                   <Constraints>

@@ -527,31 +527,31 @@ public class HomePage extends javax.swing.JFrame {
 
         homeMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         homeMenu.setForeground(new java.awt.Color(51, 0, 25));
-        homeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/Home.png"))); // NOI18N
+        homeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Home.png"))); // NOI18N
         homeMenu.setText(" Home");
         homeMenu.setPreferredSize(new java.awt.Dimension(169, 40));
 
         accountMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         accountMenu.setForeground(new java.awt.Color(51, 0, 25));
-        accountMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/Money Bag Rupee.png"))); // NOI18N
+        accountMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Money Bag Rupee.png"))); // NOI18N
         accountMenu.setText(" Account");
         accountMenu.setPreferredSize(new java.awt.Dimension(169, 40));
 
         transferMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         transferMenu.setForeground(new java.awt.Color(51, 0, 25));
-        transferMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/Initiate Money Transfer.png"))); // NOI18N
+        transferMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Initiate Money Transfer.png"))); // NOI18N
         transferMenu.setText(" Transfer");
         transferMenu.setPreferredSize(new java.awt.Dimension(169, 40));
 
         transactionMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         transactionMenu.setForeground(new java.awt.Color(51, 0, 25));
-        transactionMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/Payment History.png"))); // NOI18N
+        transactionMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Payment History.png"))); // NOI18N
         transactionMenu.setText(" Transactions");
         transactionMenu.setPreferredSize(new java.awt.Dimension(169, 40));
 
         logout.setFont(new java.awt.Font("Eras Demi ITC", 0, 14)); // NOI18N
         logout.setForeground(new java.awt.Color(51, 0, 25));
-        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_logout_14px.png"))); // NOI18N
+        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_logout_14px.png"))); // NOI18N
         logout.setText("Logout");
 
         javax.swing.GroupLayout menuBarLayout = new javax.swing.GroupLayout(menuBar);
@@ -625,14 +625,13 @@ public class HomePage extends javax.swing.JFrame {
             headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPaneLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(welcomeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(welcomeName)
                     .addGroup(headerPaneLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(headerPaneLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(39, 39, 39))
         );
 
@@ -646,7 +645,7 @@ public class HomePage extends javax.swing.JFrame {
         homePayPanel.setBackground(new java.awt.Color(51, 0, 25));
         homePayPanel.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
 
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_100%_100px.png"))); // NOI18N
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_100%_100px.png"))); // NOI18N
 
         jLabel31.setFont(new java.awt.Font("Eras Demi ITC", 1, 15)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
@@ -661,7 +660,7 @@ public class HomePage extends javax.swing.JFrame {
         homeAccountNumberLabel.setForeground(new java.awt.Color(255, 255, 255));
         homeAccountNumberLabel.setText("XXXX 1568");
 
-        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_protect_30px.png"))); // NOI18N
+        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_protect_30px.png"))); // NOI18N
 
         javax.swing.GroupLayout homePayPanelLayout = new javax.swing.GroupLayout(homePayPanel);
         homePayPanel.setLayout(homePayPanelLayout);
@@ -717,14 +716,14 @@ public class HomePage extends javax.swing.JFrame {
 
         homeShowBalanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeShowBalanceLabel.setForeground(new java.awt.Color(255, 255, 255));
-        homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_eye_14px.png"))); // NOI18N
+        homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_eye_14px.png"))); // NOI18N
         homeShowBalanceLabel.setText("Show balance");
 
         homeAddMoneyLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeAddMoneyLabel.setForeground(new java.awt.Color(255, 255, 255));
         homeAddMoneyLabel.setText("Saving Account");
 
-        homeAccountIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_merchant_account_20px.png"))); // NOI18N
+        homeAccountIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_merchant_account_20px.png"))); // NOI18N
 
         javax.swing.GroupLayout homeAccountPannelLayout = new javax.swing.GroupLayout(homeAccountPannel);
         homeAccountPannel.setLayout(homeAccountPannelLayout);
@@ -794,7 +793,7 @@ public class HomePage extends javax.swing.JFrame {
         homeTransactionAmount2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         homeTransactionAmount2.setText("$85.64 DR");
 
-        jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_transaction_20px.png"))); // NOI18N
+        jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_transaction_20px.png"))); // NOI18N
 
         javax.swing.GroupLayout homeTransactionPanelLayout = new javax.swing.GroupLayout(homeTransactionPanel);
         homeTransactionPanel.setLayout(homeTransactionPanelLayout);
@@ -871,7 +870,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel37.setText("A/C Number : ");
         bankDetails.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_protect_20px.png"))); // NOI18N
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_protect_20px.png"))); // NOI18N
         bankDetails.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 20, 20));
 
         jLabel50.setText("OBSA000044");
@@ -905,7 +904,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel43.setText("Gender :");
         personalDetails.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        accountEditOption.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/banking/images/icons8_edit_user_20px.png"))); // NOI18N
+        accountEditOption.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_edit_user_20px.png"))); // NOI18N
         personalDetails.add(accountEditOption, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
 
         jLabel45.setText("Full Name :");
