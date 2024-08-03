@@ -4,6 +4,9 @@
  */
 package com.banking;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
+
 /**
  *
  * @author Ashu
@@ -94,18 +97,19 @@ public class HomePage extends javax.swing.JFrame {
         jPasswordField3 = new javax.swing.JPasswordField();
         jLabel33 = new javax.swing.JLabel();
         welcome = new javax.swing.JPanel();
+        headerPane = new javax.swing.JPanel();
+        welcomeName = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JPanel();
         homeMenu = new javax.swing.JLabel();
         accountMenu = new javax.swing.JLabel();
         transferMenu = new javax.swing.JLabel();
         transactionMenu = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
-        headerPane = new javax.swing.JPanel();
-        welcomeName = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
+        aboutMenu = new javax.swing.JLabel();
         welcomeMainPagePanel = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        welcomeMainContent = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
         homePayPanel = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
@@ -156,11 +160,9 @@ public class HomePage extends javax.swing.JFrame {
         fatherLabel = new javax.swing.JLabel();
         motherLabel = new javax.swing.JLabel();
         personalCountryLabel = new javax.swing.JLabel();
-        personalContactLabel = new javax.swing.JLabel();
-        personalEmailLabel = new javax.swing.JLabel();
-        savePersonalDetails = new javax.swing.JButton();
         editContact = new javax.swing.JTextField();
         editEmail = new javax.swing.JTextField();
+        savePersonalDetails = new javax.swing.JButton();
         transferPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
@@ -177,11 +179,16 @@ public class HomePage extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
         transactionPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         transactionTable = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel60 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        aboutPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Banking System");
@@ -512,345 +519,228 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel5.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, -40, 400, 440));
 
-        loginSignup.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 800, 400));
+        loginSignup.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 800, 400));
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setText("@Copyright Ashwani");
-        loginSignup.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 100, -1));
+        loginSignup.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 490, 100, -1));
 
         content.addTab("Home", loginSignup);
 
         welcome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        headerPane.setBackground(new java.awt.Color(51, 0, 25));
+        headerPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        welcomeName.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
+        welcomeName.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeName.setText("Hi, Ashwani");
+        headerPane.add(welcomeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 24, 161, -1));
+
+        jLabel67.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel67.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel67.setText("Date :");
+        headerPane.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(814, 25, 37, -1));
+
+        dateLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dateLabel.setText("03 August, 2024");
+        headerPane.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(857, 25, 106, -1));
+
+        welcome.add(headerPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 1000, 80));
+
         menuBar.setBackground(new java.awt.Color(64, 224, 208));
+        menuBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         homeMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         homeMenu.setForeground(new java.awt.Color(51, 0, 25));
         homeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Home.png"))); // NOI18N
         homeMenu.setText(" Home");
         homeMenu.setPreferredSize(new java.awt.Dimension(169, 40));
+        homeMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(homeMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 19, 91, -1));
 
         accountMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         accountMenu.setForeground(new java.awt.Color(51, 0, 25));
         accountMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Money Bag Rupee.png"))); // NOI18N
         accountMenu.setText(" Account");
         accountMenu.setPreferredSize(new java.awt.Dimension(169, 40));
+        accountMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accountMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(accountMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 77, 109, -1));
 
         transferMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         transferMenu.setForeground(new java.awt.Color(51, 0, 25));
         transferMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Initiate Money Transfer.png"))); // NOI18N
         transferMenu.setText(" Transfer");
         transferMenu.setPreferredSize(new java.awt.Dimension(169, 40));
+        transferMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transferMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(transferMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 135, 109, 39));
 
         transactionMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
         transactionMenu.setForeground(new java.awt.Color(51, 0, 25));
         transactionMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Payment History.png"))); // NOI18N
         transactionMenu.setText(" Transactions");
         transactionMenu.setPreferredSize(new java.awt.Dimension(169, 40));
+        transactionMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transactionMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(transactionMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 192, 148, -1));
 
         logout.setFont(new java.awt.Font("Eras Demi ITC", 0, 14)); // NOI18N
         logout.setForeground(new java.awt.Color(51, 0, 25));
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_logout_14px.png"))); // NOI18N
         logout.setText("Logout");
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
+        menuBar.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 394, -1, 28));
 
-        javax.swing.GroupLayout menuBarLayout = new javax.swing.GroupLayout(menuBar);
-        menuBar.setLayout(menuBarLayout);
-        menuBarLayout.setHorizontalGroup(
-            menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuBarLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menuBarLayout.createSequentialGroup()
-                        .addComponent(homeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(57, 57, 57))
-                    .addGroup(menuBarLayout.createSequentialGroup()
-                        .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(81, 81, 81))
-                    .addGroup(menuBarLayout.createSequentialGroup()
-                        .addComponent(transferMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(39, 39, 39))
-                    .addComponent(transactionMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(menuBarLayout.createSequentialGroup()
-                        .addComponent(accountMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(39, 39, 39)))
-                .addGap(27, 27, 27))
-        );
-        menuBarLayout.setVerticalGroup(
-            menuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuBarLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(homeMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(accountMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(transferMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(transactionMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(149, 149, 149)
-                .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
-        );
+        aboutMenu.setFont(new java.awt.Font("Eras Demi ITC", 0, 14)); // NOI18N
+        aboutMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_info_14px_1.png"))); // NOI18N
+        aboutMenu.setText("About");
+        aboutMenu.setPreferredSize(new java.awt.Dimension(67, 17));
+        aboutMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aboutMenuMouseClicked(evt);
+            }
+        });
+        menuBar.add(aboutMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 359, -1, 29));
 
-        welcome.add(menuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 85, 190, 440));
-
-        headerPane.setBackground(new java.awt.Color(51, 0, 25));
-
-        welcomeName.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
-        welcomeName.setForeground(new java.awt.Color(255, 255, 255));
-        welcomeName.setText("Hi, Ashwani");
-
-        jLabel67.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel67.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel67.setText("Date :");
-
-        dateLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dateLabel.setText("03 August, 2024");
-
-        javax.swing.GroupLayout headerPaneLayout = new javax.swing.GroupLayout(headerPane);
-        headerPane.setLayout(headerPaneLayout);
-        headerPaneLayout.setHorizontalGroup(
-            headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPaneLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(welcomeName, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addGap(633, 633, 633)
-                .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-        );
-        headerPaneLayout.setVerticalGroup(
-            headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPaneLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welcomeName)
-                    .addGroup(headerPaneLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(headerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(39, 39, 39))
-        );
-
-        welcome.add(headerPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 1000, 80));
+        welcome.add(menuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 85, 190, 460));
 
         welcomeMainPagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        welcomeMainContent.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        welcomeMainContent.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         homePanel.setBackground(new java.awt.Color(255, 204, 204));
         homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         homePayPanel.setBackground(new java.awt.Color(51, 0, 25));
+        homePayPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 153), new java.awt.Color(255, 255, 153), new java.awt.Color(153, 255, 153), new java.awt.Color(51, 255, 204)));
         homePayPanel.setFont(new java.awt.Font("Eras Demi ITC", 0, 20)); // NOI18N
+        homePayPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_100%_100px.png"))); // NOI18N
+        homePayPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 88));
 
         jLabel31.setFont(new java.awt.Font("Eras Demi ITC", 1, 15)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("PAY");
+        homePayPanel.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 100, -1));
+        jLabel31.getAccessibleContext().setAccessibleParent(jLabel30);
 
         jLabel32.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("Account Number");
+        homePayPanel.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 30, 197, -1));
 
         homeAccountNumberLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeAccountNumberLabel.setForeground(new java.awt.Color(255, 255, 255));
         homeAccountNumberLabel.setText("XXXX 1568");
+        homePayPanel.add(homeAccountNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 56, 91, -1));
 
         jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_protect_30px.png"))); // NOI18N
-
-        javax.swing.GroupLayout homePayPanelLayout = new javax.swing.GroupLayout(homePayPanel);
-        homePayPanel.setLayout(homePayPanelLayout);
-        homePayPanelLayout.setHorizontalGroup(
-            homePayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homePayPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(homePayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(homePayPanelLayout.createSequentialGroup()
-                        .addComponent(homeAccountNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(106, 106, 106))
-                    .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
-                .addComponent(jLabel57)
-                .addGap(28, 28, 28))
-            .addGroup(homePayPanelLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addGroup(homePayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(105, 105, 105))
-        );
-        homePayPanelLayout.setVerticalGroup(
-            homePayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homePayPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(homePayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(homePayPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(homeAccountNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35)
-                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 88, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(148, 148, 148))
-        );
-
-        jLabel31.getAccessibleContext().setAccessibleParent(jLabel30);
+        homePayPanel.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 30, -1, 42));
 
         homePanel.add(homePayPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 310, 360));
 
         homeAccountPannel.setBackground(new java.awt.Color(51, 0, 25));
+        homeAccountPannel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 153), new java.awt.Color(255, 255, 153), new java.awt.Color(153, 255, 153), new java.awt.Color(51, 255, 204)));
+        homeAccountPannel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel85.setFont(new java.awt.Font("Eras Medium ITC", 0, 14)); // NOI18N
         jLabel85.setForeground(new java.awt.Color(255, 255, 255));
         jLabel85.setText("Account Balance");
+        homeAccountPannel.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 23, 161, -1));
 
         homeAccountBalance.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeAccountBalance.setForeground(new java.awt.Color(255, 255, 255));
         homeAccountBalance.setText(" * * * *");
+        homeAccountPannel.add(homeAccountBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 55, 103, -1));
 
         homeShowBalanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeShowBalanceLabel.setForeground(new java.awt.Color(255, 255, 255));
         homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_eye_14px.png"))); // NOI18N
         homeShowBalanceLabel.setText("Show balance");
+        homeAccountPannel.add(homeShowBalanceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 149, 116, -1));
 
         homeAddMoneyLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeAddMoneyLabel.setForeground(new java.awt.Color(255, 255, 255));
         homeAddMoneyLabel.setText("Saving Account");
+        homeAccountPannel.add(homeAddMoneyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 149, -1, -1));
 
         homeAccountIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_merchant_account_20px.png"))); // NOI18N
-
-        javax.swing.GroupLayout homeAccountPannelLayout = new javax.swing.GroupLayout(homeAccountPannel);
-        homeAccountPannel.setLayout(homeAccountPannelLayout);
-        homeAccountPannelLayout.setHorizontalGroup(
-            homeAccountPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homeAccountPannelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(homeAccountPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(homeAccountPannelLayout.createSequentialGroup()
-                        .addGroup(homeAccountPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(homeAccountPannelLayout.createSequentialGroup()
-                                .addComponent(homeAccountBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel85, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(99, 99, 99)
-                        .addComponent(homeAccountIconLabel)
-                        .addGap(37, 37, 37))
-                    .addGroup(homeAccountPannelLayout.createSequentialGroup()
-                        .addComponent(homeShowBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(92, 92, 92)
-                        .addComponent(homeAddMoneyLabel)
-                        .addGap(23, 23, 23))))
-        );
-        homeAccountPannelLayout.setVerticalGroup(
-            homeAccountPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homeAccountPannelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(homeAccountPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel85, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeAccountIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(homeAccountBalance)
-                .addGap(78, 78, 78)
-                .addGroup(homeAccountPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(homeShowBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeAddMoneyLabel))
-                .addGap(24, 24, 24))
-        );
+        homeAccountPannel.add(homeAccountIconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 23, -1, 26));
 
         homePanel.add(homeAccountPannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 340, 180));
 
         homeTransactionPanel.setBackground(new java.awt.Color(51, 0, 25));
+        homeTransactionPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 153), new java.awt.Color(255, 255, 153), new java.awt.Color(153, 255, 153), new java.awt.Color(51, 255, 204)));
+        homeTransactionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         homeSeeMoreTransaction.setFont(new java.awt.Font("Eras Demi ITC", 0, 14)); // NOI18N
         homeSeeMoreTransaction.setForeground(new java.awt.Color(255, 255, 255));
         homeSeeMoreTransaction.setText("See more...");
+        homeTransactionPanel.add(homeSeeMoreTransaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 131, -1, -1));
 
         welcomeName1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         welcomeName1.setForeground(new java.awt.Color(255, 255, 255));
         welcomeName1.setText("Last Transactions");
+        homeTransactionPanel.add(welcomeName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 17, 222, -1));
 
         homeTransactionName1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         homeTransactionName1.setForeground(new java.awt.Color(255, 255, 255));
         homeTransactionName1.setText("Akash Gupta");
+        homeTransactionPanel.add(homeTransactionName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 63, 160, -1));
 
         homeTransactionName2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         homeTransactionName2.setForeground(new java.awt.Color(255, 255, 255));
         homeTransactionName2.setText("Priya Kashyap");
+        homeTransactionPanel.add(homeTransactionName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 97, 160, -1));
 
         homeTransactionAmount1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeTransactionAmount1.setForeground(new java.awt.Color(255, 255, 255));
         homeTransactionAmount1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         homeTransactionAmount1.setText("$45.21 CR");
+        homeTransactionPanel.add(homeTransactionAmount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 63, 65, -1));
 
         homeTransactionAmount2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeTransactionAmount2.setForeground(new java.awt.Color(255, 255, 255));
         homeTransactionAmount2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         homeTransactionAmount2.setText("$85.64 DR");
+        homeTransactionPanel.add(homeTransactionAmount2, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 97, 65, -1));
 
         jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_transaction_20px.png"))); // NOI18N
-
-        javax.swing.GroupLayout homeTransactionPanelLayout = new javax.swing.GroupLayout(homeTransactionPanel);
-        homeTransactionPanel.setLayout(homeTransactionPanelLayout);
-        homeTransactionPanelLayout.setHorizontalGroup(
-            homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeTransactionPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welcomeName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(homeTransactionPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(homeTransactionPanelLayout.createSequentialGroup()
-                                .addComponent(homeSeeMoreTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(86, 86, 86))
-                            .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(homeTransactionName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(homeTransactionName2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(52, 52, 52)))
-                .addGap(9, 9, 9)
-                .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(homeTransactionPanelLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel68, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(1, 1, 1))
-                    .addComponent(homeTransactionAmount1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeTransactionAmount2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26))
-        );
-        homeTransactionPanelLayout.setVerticalGroup(
-            homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeTransactionPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welcomeName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel68, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(homeTransactionName1)
-                    .addComponent(homeTransactionAmount1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(homeTransactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(homeTransactionName2)
-                    .addComponent(homeTransactionAmount2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(homeSeeMoreTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
-        );
+        homeTransactionPanel.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 17, -1, -1));
 
         homePanel.add(homeTransactionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 340, 170));
 
-        jTabbedPane2.addTab("tab1", homePanel);
+        welcomeMainContent.addTab("tab1", homePanel);
 
         accountPanel.setBackground(new java.awt.Color(255, 204, 204));
         accountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bankDetails.setBackground(new java.awt.Color(255, 210, 204));
+        bankDetails.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bankDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel29.setForeground(new java.awt.Color(51, 0, 25));
@@ -885,6 +775,7 @@ public class HomePage extends javax.swing.JFrame {
         accountPanel.add(bankDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 750, 140));
 
         personalDetails.setBackground(new java.awt.Color(255, 210, 204));
+        personalDetails.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         personalDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -905,6 +796,11 @@ public class HomePage extends javax.swing.JFrame {
         personalDetails.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         accountEditOption.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_edit_user_20px.png"))); // NOI18N
+        accountEditOption.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accountEditOptionMouseClicked(evt);
+            }
+        });
         personalDetails.add(accountEditOption, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
 
         jLabel45.setText("Full Name :");
@@ -943,25 +839,24 @@ public class HomePage extends javax.swing.JFrame {
         personalCountryLabel.setText("India");
         personalDetails.add(personalCountryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 180, -1));
 
-        personalContactLabel.setText("+91 9039477540");
-        personalDetails.add(personalContactLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 180, -1));
+        editContact.setBackground(new java.awt.Color(255, 210, 204));
+        editContact.setText("+91 9039477540");
+        editContact.setBorder(null);
+        personalDetails.add(editContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 230, 20));
 
-        personalEmailLabel.setText("ashwanidwivedi7898@gmail.com");
-        personalDetails.add(personalEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 180, -1));
+        editEmail.setBackground(new java.awt.Color(255, 210, 204));
+        editEmail.setText("ashwanidwivedi7898@gmail.com");
+        editEmail.setBorder(null);
+        editEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        personalDetails.add(editEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 230, 20));
 
         savePersonalDetails.setBackground(new java.awt.Color(255, 204, 204));
         savePersonalDetails.setText("Save details");
         personalDetails.add(savePersonalDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
-        editContact.setText("jTextField1");
-        personalDetails.add(editContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 75, 180, -1));
-
-        editEmail.setText("jTextField8");
-        personalDetails.add(editEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 107, 180, -1));
-
         accountPanel.add(personalDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 750, 200));
 
-        jTabbedPane2.addTab("tab2", accountPanel);
+        welcomeMainContent.addTab("tab2", accountPanel);
 
         transferPanel.setBackground(new java.awt.Color(255, 204, 204));
         transferPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -971,58 +866,61 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel53.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel53.setText("Transfer Money");
-        jPanel1.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
+        jPanel1.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, -1));
 
         jLabel58.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel58.setText("Account number :");
-        jPanel1.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, 25));
+        jPanel1.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 25));
 
         jTextField2.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 190, 25));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 190, 25));
 
         jLabel62.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel62.setText("Confirm account number :");
-        jPanel1.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, 25));
+        jPanel1.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 25));
 
         jTextField3.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 190, 25));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 190, 25));
 
         jLabel63.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel63.setText("IFSC Code :");
-        jPanel1.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, 25));
+        jPanel1.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 25));
 
         jTextField4.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 190, 25));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 190, 25));
 
         jLabel64.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel64.setText("Full Name :");
-        jPanel1.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, 25));
+        jPanel1.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 25));
 
         jTextField5.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 190, 25));
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 190, 25));
 
         jLabel65.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel65.setText("Enter Amount :");
-        jPanel1.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, 25));
+        jPanel1.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, 25));
 
         jTextField6.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 190, 25));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 190, 25));
 
         jTextField7.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 190, 25));
+        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 190, 25));
 
         jLabel66.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel66.setText("Description :");
-        jPanel1.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, 25));
+        jPanel1.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, 25));
 
         jButton1.setBackground(new java.awt.Color(255, 210, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Send");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 80, -1));
 
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_exchange_30px.png"))); // NOI18N
+        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 30, 25));
+
         transferPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 670, 350));
 
-        jTabbedPane2.addTab("tab3", transferPanel);
+        welcomeMainContent.addTab("tab3", transferPanel);
 
         transactionPanel.setBackground(new java.awt.Color(255, 204, 204));
         transactionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1055,7 +953,9 @@ public class HomePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setOpaque(false);
         jTable1.setRowHeight(30);
+        jTable1.setShowGrid(false);
         transactionTable.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -1074,13 +974,31 @@ public class HomePage extends javax.swing.JFrame {
         jLabel60.setText("Transactions");
         jPanel2.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, -1));
 
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_transaction_30px.png"))); // NOI18N
+        jPanel2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 30, 25));
+
         transactionPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 640, 350));
 
-        jTabbedPane2.addTab("tab4", transactionPanel);
+        welcomeMainContent.addTab("tab4", transactionPanel);
 
-        welcomeMainPagePanel.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 810, 480));
+        aboutPanel.setBackground(new java.awt.Color(255, 204, 204));
+        aboutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        welcome.add(welcomeMainPagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 85, 810, 440));
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("About Online Banking System\n\nApplication Name: Online Banking System \nVersion: 1.0.0  \nSupported OS: Windows 10 or later  \n\nOverview\n\nThe Online Banking System is a comprehensive application designed to digitize\nand streamline the functionalities of modern banking institutions. Developed\nwith the latest technologies, this system ensures secure, efficient, and user-friendly\nbanking operations, catering to the needs of both banking staff and customers.\n\nKey Features\n\n- Account Management: Efficient handling of various types of accounts, including\n   savings, current, and fixed deposit accounts.\n\n- Transaction Processing: Secure and swift processing of transactions such as deposits,\n   withdrawals, and transfers.\n\n- Customer Support: Integrated support features including query management and\n   resolution tracking.\n\n- Security: Advanced security protocols to protect user data and transactions, including\n   encryption and multi-factor authentication.\n\nFor new updates, check the repository at [GitHub]\n(https://github.com/AshwaniCoding/DIGIBHEM/tree/7ed6b145f13f2b88c21d2549ee900bb2418b3a00/Project%201%20-%20Online%20Banking%20System/OnlineBankingSystem).\nCopy above link and past it on browser\n\nFor any type of problem, feel free to contact via email at ashwanidwivedi7898@gmail.com.");
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        aboutPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 590, 320));
+
+        welcomeMainContent.addTab("tab5", aboutPanel);
+
+        welcomeMainPagePanel.add(welcomeMainContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 810, 530));
+
+        welcome.add(welcomeMainPagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 85, 810, 450));
 
         content.addTab("Welcome", welcome);
 
@@ -1152,7 +1070,8 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        content.setSelectedIndex(1);
+        welcomeMainContent.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
@@ -1162,6 +1081,40 @@ public class HomePage extends javax.swing.JFrame {
     private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField3ActionPerformed
+
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        content.setSelectedIndex(0);
+        initialization();
+    }//GEN-LAST:event_logoutMouseClicked
+
+    private void accountEditOptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountEditOptionMouseClicked
+        editEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        editEmail.setBackground(new java.awt.Color(255, 255, 255));
+        editContact.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        editContact.setBackground(new java.awt.Color(255, 255, 255));
+        savePersonalDetails.setVisible(true);
+    }//GEN-LAST:event_accountEditOptionMouseClicked
+
+    private void aboutMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutMenuMouseClicked
+        welcomeMainContent.setSelectedIndex(4);
+    }//GEN-LAST:event_aboutMenuMouseClicked
+
+    private void transactionMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMenuMouseClicked
+        welcomeMainContent.setSelectedIndex(3);
+    }//GEN-LAST:event_transactionMenuMouseClicked
+
+    private void transferMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transferMenuMouseClicked
+        welcomeMainContent.setSelectedIndex(2);
+    }//GEN-LAST:event_transferMenuMouseClicked
+
+    private void accountMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMenuMouseClicked
+        welcomeMainContent.setSelectedIndex(1);
+        savePersonalDetails.setVisible(false);
+    }//GEN-LAST:event_accountMenuMouseClicked
+
+    private void homeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMenuMouseClicked
+        welcomeMainContent.setSelectedIndex(0);
+    }//GEN-LAST:event_homeMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1195,6 +1148,8 @@ public class HomePage extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aboutMenu;
+    private javax.swing.JPanel aboutPanel;
     private javax.swing.JLabel accountEditOption;
     private javax.swing.JLabel accountMenu;
     private javax.swing.JLabel accountNumber;
@@ -1255,6 +1210,8 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
@@ -1298,8 +1255,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -1313,11 +1271,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel menuBar;
     private javax.swing.JLabel motherLabel;
     private javax.swing.JLabel personalAadharLabel;
-    private javax.swing.JLabel personalContactLabel;
     private javax.swing.JLabel personalCountryLabel;
     private javax.swing.JLabel personalDOB;
     private javax.swing.JPanel personalDetails;
-    private javax.swing.JLabel personalEmailLabel;
     private javax.swing.JLabel personalGender;
     private javax.swing.JLabel personalNameLabel;
     private javax.swing.JTabbedPane register;
@@ -1338,6 +1294,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel transferMenu;
     private javax.swing.JPanel transferPanel;
     private javax.swing.JPanel welcome;
+    private javax.swing.JTabbedPane welcomeMainContent;
     private javax.swing.JPanel welcomeMainPagePanel;
     private javax.swing.JLabel welcomeName;
     private javax.swing.JLabel welcomeName1;
