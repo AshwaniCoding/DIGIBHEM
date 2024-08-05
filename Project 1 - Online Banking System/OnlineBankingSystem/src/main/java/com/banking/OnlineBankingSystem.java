@@ -4,10 +4,9 @@
 
 package com.banking;
 
+
 import static com.banking.MySQLConnection.createDatabaseAndTables;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import static com.banking.MySQLConnection.createTrigger;
 
 /**
  *
@@ -20,6 +19,7 @@ public class OnlineBankingSystem {
             new HomePage().setVisible(true);
         });
         createDatabaseAndTables();
+        createTrigger();
     }
     
     

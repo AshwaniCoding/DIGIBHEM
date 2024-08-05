@@ -4,8 +4,11 @@
  */
 package com.banking;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,59 +23,59 @@ public class HomePage extends javax.swing.JFrame {
         initComponents();
         initialization();
     }
-    
+
+    LoginSignup ls = new LoginSignup();
+
     //it is declared to convert show bal to hide bal and from hide bal to show bal in the home page
-    private boolean isBalanceShown = true; 
-    
+    private boolean isBalanceShown = true;
+
     private void toggleBalance(float balance) {
-    if (isBalanceShown) {
-        homeAccountBalance.setText(String.format("₹ %.2f", balance));
-        homeShowBalanceLabel.setText("Hide Balance");
-        homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_hide_14px.png")));
-    } else {
-        homeAccountBalance.setText("* * * *");
-        homeShowBalanceLabel.setText("Show Balance");
-        homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_eye_14px.png")));
+        if (isBalanceShown) {
+            homeAccountBalance.setText(String.format("₹ %.2f", balance));
+            homeShowBalanceLabel.setText("Hide Balance");
+            homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_hide_14px.png")));
+        } else {
+            homeAccountBalance.setText("* * * *");
+            homeShowBalanceLabel.setText("Show Balance");
+            homeShowBalanceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_eye_14px.png")));
+        }
+        isBalanceShown = !isBalanceShown;
     }
-    isBalanceShown = !isBalanceShown;
-    }
-    
+
     private void setDateToLabel() {
         SimpleDateFormat formatter = new SimpleDateFormat("d MMMM, yyyy");
         String dateString = formatter.format(new Date());
         dateLabel.setText(dateString);
     }
+
     /*I have used the tabbed pane with the absolute layout for better smooth switching from one window to another inside a single frame only*/
-    
     //For setting the front homepage of the application that which tabbed pane should be opened at the time of starting the application
-    private void initialization(){
+    public static void initialization() {
         content.setSelectedIndex(0);
         login.setSelectedIndex(0);
         register.setSelectedIndex(1);
     }
-    
+
     //For sending all the details to LoginSignup page collected from textfields for signup process
-    public LoginSignup.UserInfo getUserInfo() {
-        String fullName = fullNameText.getText();
-        String fatherName = fatherNameText.getText();
-        String motherName = motherNameText.getText();
-        String aadhar = aadharText.getText();
-        String mobile = mobileText.getText();
-        String email = emailText.getText();
-        String signupUsername = signupUsernameText.getText();
-
-        Date dob = dobText.getDate();
-        java.sql.Date sqlDob = (dob != null) ? new java.sql.Date(dob.getTime()) : null;
-
-        String gender = (String) genderText.getSelectedItem();
-        String country = (String) countryText.getSelectedItem();
-
-        String pin = new String(pinText.getPassword());
-
-
-        return new LoginSignup.UserInfo(fullName, fatherName, motherName, aadhar, mobile, email, signupUsername, sqlDob, gender, country, pin);
-    }
-
+//    public LoginSignup.UserInfo getUserInfo() {
+//        String fullName = fullNameText.getText();
+//        String fatherName = fatherNameText.getText();
+//        String motherName = motherNameText.getText();
+//        String aadhar = aadharText.getText();
+//        String mobile = mobileText.getText();
+//        String email = emailText.getText();
+//        String signupUsername = signupUsernameText.getText();
+//
+//        Date dob = dobText.getDate();
+//        java.sql.Date sqlDob = (dob != null) ? new java.sql.Date(dob.getTime()) : null;
+//
+//        String gender = (String) genderText.getSelectedItem();
+//        String country = (String) countryText.getSelectedItem();
+//
+//        String pin = new String(pinText.getPassword());
+//
+//        return new LoginSignup.UserInfo(fullName, fatherName, motherName, aadhar, mobile, email, signupUsername, sqlDob, gender, country, pin);
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -415,7 +418,15 @@ public class HomePage extends javax.swing.JFrame {
         countryText.setMaximumRowCount(5);
         countryText.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "India", "Afganistan", "Australia", "Bangladesh", "China", "France", "Japan", "Maldives", "New Zealand", "Russia", "Sri Lanka", "Vietnam" }));
         jPanel8.add(countryText, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 200, 30));
+
+        dobText.setDate(new Date(0,0,1));
+        dobText.setDateFormatString("dd-MM-y");
+        dobText.setMaxSelectableDate(new Date());
+        dobText.setMinSelectableDate(new java.util.Date(-2209004917000L));
         jPanel8.add(dobText, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 200, 30));
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dobText.getDateEditor();
+
+        editor.setEditable(false);
 
         register.addTab("tab1", jPanel8);
 
@@ -1109,8 +1120,10 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_motherNameTextActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        login.setSelectedIndex(1);
-        register.setSelectedIndex(2);
+        if (ls.signupPage1Validation()) {
+            login.setSelectedIndex(1);
+            register.setSelectedIndex(2);
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void aadharTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aadharTextActionPerformed
@@ -1130,7 +1143,18 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_signupUsernameTextActionPerformed
 
     private void signupSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupSubmitButtonActionPerformed
-        // TODO add your handling code here:
+
+        char[] pin = pinText.getPassword();
+        char[] cnfPin = cnfPinText.getPassword();
+
+        if (ls.signupPage2Validation()) {
+            if (Arrays.equals(pin, cnfPin)) {
+                // Save user info using LoginSignup
+                ls.saveUserInfo();
+            } else {
+                JOptionPane.showMessageDialog(null, "Pins do not match");
+            }
+        }
     }//GEN-LAST:event_signupSubmitButtonActionPerformed
 
     private void signinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinButtonActionPerformed
@@ -1190,12 +1214,12 @@ public class HomePage extends javax.swing.JFrame {
     private void addMoneyMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMoneyMenuMouseClicked
         //Opens the Dialogbox to add the money
         AddMoneyDialog dialog = new AddMoneyDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        dialog.dispose();
-                    }
-                });
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                dialog.dispose();
+            }
+        });
         dialog.setLocationRelativeTo(this); //this is for not performing any operation in frame 1 as dialog box is opened
         dialog.setVisible(true);
     }//GEN-LAST:event_addMoneyMenuMouseClicked
@@ -1264,7 +1288,7 @@ public class HomePage extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField aadharText;
+    protected static javax.swing.JTextField aadharText;
     private javax.swing.JLabel aboutMenu;
     private javax.swing.JPanel aboutPanel;
     private javax.swing.JLabel accountEditOption;
@@ -1274,18 +1298,18 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel accountUsername;
     private javax.swing.JLabel addMoneyMenu;
     private javax.swing.JPanel bankDetails;
-    private javax.swing.JPasswordField cnfPinText;
-    private javax.swing.JTabbedPane content;
-    private javax.swing.JComboBox<String> countryText;
+    protected static javax.swing.JPasswordField cnfPinText;
+    protected static javax.swing.JTabbedPane content;
+    protected static javax.swing.JComboBox<String> countryText;
     private javax.swing.JLabel dateLabel;
-    private com.toedter.calendar.JDateChooser dobText;
+    protected static com.toedter.calendar.JDateChooser dobText;
     private javax.swing.JTextField editContact;
     private javax.swing.JTextField editEmail;
-    private javax.swing.JTextField emailText;
+    protected static javax.swing.JTextField emailText;
     private javax.swing.JLabel fatherLabel;
-    private javax.swing.JTextField fatherNameText;
-    private javax.swing.JTextField fullNameText;
-    private javax.swing.JComboBox<String> genderText;
+    protected static javax.swing.JTextField fatherNameText;
+    protected static javax.swing.JTextField fullNameText;
+    protected static javax.swing.JComboBox<String> genderText;
     private javax.swing.JPanel headerPane;
     private javax.swing.JLabel homeAccountBalance;
     private javax.swing.JLabel homeAccountIconLabel;
@@ -1383,28 +1407,28 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTabbedPane login;
+    protected static javax.swing.JTabbedPane login;
     private javax.swing.JPanel loginSignup;
-    private javax.swing.JTextField loginUsernameText;
+    protected static javax.swing.JTextField loginUsernameText;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel menuBar;
-    private javax.swing.JTextField mobileText;
+    protected static javax.swing.JTextField mobileText;
     private javax.swing.JLabel motherLabel;
-    private javax.swing.JTextField motherNameText;
+    protected static javax.swing.JTextField motherNameText;
     private javax.swing.JButton nextButton;
-    private javax.swing.JPasswordField passwordText;
+    protected static javax.swing.JPasswordField passwordText;
     private javax.swing.JLabel personalAadharLabel;
     private javax.swing.JLabel personalCountryLabel;
     private javax.swing.JLabel personalDOB;
     private javax.swing.JPanel personalDetails;
     private javax.swing.JLabel personalGender;
     private javax.swing.JLabel personalNameLabel;
-    private javax.swing.JPasswordField pinText;
-    private javax.swing.JTabbedPane register;
+    protected static javax.swing.JPasswordField pinText;
+    protected static javax.swing.JTabbedPane register;
     private javax.swing.JButton savePersonalDetails;
     private javax.swing.JButton signinButton;
     private javax.swing.JButton signupSubmitButton;
-    private javax.swing.JTextField signupUsernameText;
+    protected static javax.swing.JTextField signupUsernameText;
     private javax.swing.JLabel transactionMenu;
     private javax.swing.JPanel transactionPanel;
     private javax.swing.JScrollPane transactionTable;

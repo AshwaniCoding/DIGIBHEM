@@ -17,6 +17,7 @@ public class MySQLConnection {
 
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306";
+    private static final String URL1 = "jdbc:mysql://localhost:3306/bankingapplication";
     private static final String USER = "root";
     private static final String PASSWORD = ""; 
     
@@ -26,17 +27,28 @@ public class MySQLConnection {
             // Load MySQL JDBC Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("MySQL JDBC Driver not found. Include it in your library path.");
+            e.printStackTrace();
+        }
+        // Establish the connection
+        return DriverManager.getConnection(URL1, USER, PASSWORD);
+    }
+    
+    public static Connection getConnectionForDatabase() throws SQLException {
+        try {
+            // Load MySQL JDBC Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         // Establish the connection
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
+    
 
     // Method to create the database and tables
     public static void createDatabaseAndTables() {
 
-        try (Connection connection = MySQLConnection.getConnection();
+        try (Connection connection = MySQLConnection.getConnectionForDatabase();
              Statement statement = connection.createStatement()){
             // Create Database
             
@@ -50,16 +62,17 @@ public class MySQLConnection {
             // Create Users table with additional columns
             String createUsersTable = "CREATE TABLE IF NOT EXISTS Users (" +
                     "user_id INT AUTO_INCREMENT PRIMARY KEY, " +
-                    "username VARCHAR(255) UNIQUE NOT NULL, " +
-                    "password_hash VARCHAR(255) NOT NULL, " +
+                    "full_name VARCHAR(255) NOT NULL, " +
                     "father_name VARCHAR(255) NOT NULL, " +
                     "mother_name VARCHAR(255) NOT NULL, " +
+                    "aadhar VARCHAR(12) UNIQUE NOT NULL, " +
+                    "mobile VARCHAR(20) UNIQUE NOT NULL, " +
+                    "email VARCHAR(255) UNIQUE NOT NULL, " +
+                    "username VARCHAR(255) UNIQUE NOT NULL, " +
                     "dob DATE NOT NULL, " +
                     "gender ENUM('male', 'female', 'other') NOT NULL, " +
-                    "aadhar_number VARCHAR(12) UNIQUE NOT NULL, " +
-                    "email VARCHAR(255) UNIQUE NOT NULL, " +
-                    "phone_number VARCHAR(20) UNIQUE NOT NULL, " +
                     "country VARCHAR(100) NOT NULL, " +
+                    "pin VARCHAR(6) NOT NULL, " +
                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                     "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
             statement.executeUpdate(createUsersTable);
