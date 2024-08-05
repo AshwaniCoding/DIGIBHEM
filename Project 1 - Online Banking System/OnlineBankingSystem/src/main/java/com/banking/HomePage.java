@@ -42,7 +42,7 @@ public class HomePage extends javax.swing.JFrame {
         isBalanceShown = !isBalanceShown;
     }
 
-    private void setDateToLabel() {
+    protected static void setDateToLabel() {
         SimpleDateFormat formatter = new SimpleDateFormat("d MMMM, yyyy");
         String dateString = formatter.format(new Date());
         dateLabel.setText(dateString);
@@ -1158,9 +1158,11 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_signupSubmitButtonActionPerformed
 
     private void signinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinButtonActionPerformed
-        content.setSelectedIndex(1);
-        welcomeMainContent.setSelectedIndex(0);
-        setDateToLabel();
+        if (!ls.loginValidation()) {
+            JOptionPane.showMessageDialog(null, "Validation failed");
+        } else {
+            ls.loginUser();
+        }
     }//GEN-LAST:event_signinButtonActionPerformed
 
     private void cnfPinTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnfPinTextActionPerformed
@@ -1301,7 +1303,7 @@ public class HomePage extends javax.swing.JFrame {
     protected static javax.swing.JPasswordField cnfPinText;
     protected static javax.swing.JTabbedPane content;
     protected static javax.swing.JComboBox<String> countryText;
-    private javax.swing.JLabel dateLabel;
+    protected static javax.swing.JLabel dateLabel;
     protected static com.toedter.calendar.JDateChooser dobText;
     private javax.swing.JTextField editContact;
     private javax.swing.JTextField editEmail;
@@ -1435,7 +1437,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel transferMenu;
     private javax.swing.JPanel transferPanel;
     private javax.swing.JPanel welcome;
-    protected javax.swing.JTabbedPane welcomeMainContent;
+    protected static javax.swing.JTabbedPane welcomeMainContent;
     private javax.swing.JPanel welcomeMainPagePanel;
     private javax.swing.JLabel welcomeName;
     private javax.swing.JLabel welcomeName1;

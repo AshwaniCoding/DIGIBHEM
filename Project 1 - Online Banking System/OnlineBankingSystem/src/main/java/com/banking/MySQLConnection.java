@@ -111,4 +111,25 @@ public class MySQLConnection {
             e.printStackTrace();
         }
     }
+    
+    //function to create a trigger which automatically takes as a row when new user created
+    public static void createTrigger() {
+        String triggerSQL
+                = "CREATE TRIGGER after_user_insert\n"
+                + "AFTER INSERT ON Users\n"
+                + "FOR EACH ROW\n"
+                + "BEGIN\n"
+                + "    DECLARE account_number VARCHAR(20);\n"
+                + "    SET account_number = CONCAT('ACC', NEW.user_id, LPAD(FLOOR(RAND() * 1000000), 6, '0'));\n"
+                + "    INSERT INTO Accounts (user_id, account_number, account_type, IFSC_code, balance)\n"
+                + "    VALUES (NEW.user_id, account_number, 'Savings', 'OBSA000044', 0.00);\n"
+                + "END";
+
+        try (Connection connection = MySQLConnection.getConnection(); Statement statement = connection.createStatement()) {
+            // Execute the trigger creation SQL
+            statement.execute(triggerSQL);
+            System.out.println("Trigger created successfully");
+        } catch (SQLException e) {
+        }
+    }
 }

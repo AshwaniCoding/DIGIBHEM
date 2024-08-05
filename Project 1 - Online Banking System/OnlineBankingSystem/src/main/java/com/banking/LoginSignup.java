@@ -4,12 +4,14 @@
  */
 package com.banking;
 
+import static com.banking.HomePage.content;
+import static com.banking.HomePage.setDateToLabel;
+import static com.banking.HomePage.welcomeMainContent;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
@@ -18,9 +20,8 @@ import javax.swing.border.Border;
  * @author Ashu
  */
 public class LoginSignup {
-    
+
     //----------------------------------Signup Part----------------------
-    
     //Function to validate the Signup first page of validation
     public boolean signupPage1Validation() {
         Border defaultBorder = HomePage.aadharText.getBorder();
@@ -259,6 +260,74 @@ public class LoginSignup {
         HomePage.cnfPinText.setText("");
     }
 
-    
     //----------------------------------Login Part----------------------
+    private String loginUsername;
+    private String loginPin;
+
+    public void loginInfo() {
+        this.loginUsername = HomePage.loginUsernameText.getText();
+        this.loginPin = new String(HomePage.passwordText.getPassword());
+    }
+
+    public String getLoginUsername() {
+        return loginUsername;
+    }
+
+    public String getLoginPassword() {
+        return loginPin;
+    }
+
+    public boolean loginValidation() {
+        loginInfo();
+        Border defaultBorder = HomePage.fullNameText.getBorder();
+        if (getLoginUsername().equals("")) {
+            HomePage.loginUsernameText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        } else {
+            HomePage.loginUsernameText.setBorder(defaultBorder);
+        }
+
+        if (getLoginPassword().equals("")) {
+            HomePage.passwordText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        } else {
+            HomePage.passwordText.setBorder(defaultBorder);
+        }
+
+        return true;
+    }
+
+    public void loginUser() {
+//        loginInfo();
+        ResultSet rs = null;
+        String query = "SELECT * FROM users WHERE username = ? AND pin = ?";
+
+        try (Connection connection = MySQLConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, getLoginUsername());
+            preparedStatement.setString(2, getLoginPassword());
+
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Login Successful");
+                content.setSelectedIndex(1);
+                welcomeMainContent.setSelectedIndex(0);
+                setDateToLabel();
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid username or PIN");
+            }
+
+        } catch (Exception e) { // Print the stack trace for debugging purposes
+            // Print the stack trace for debugging purposes
+            JOptionPane.showMessageDialog(null, "An error occurred during login");
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    // Print the stack trace for debugging purposes
+                    
+                }
+            }
+        }
+    }
 }
