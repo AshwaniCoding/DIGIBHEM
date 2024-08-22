@@ -4,7 +4,9 @@
  */
 package com.banking;
 
+import static com.banking.HomePage.content;
 import com.toedter.calendar.JTextFieldDateEditor;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,6 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class HomePage extends javax.swing.JFrame {
 
+    public static String loginUserName;
+
     /**
      * Creates new form HomePage
      */
@@ -25,6 +29,8 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     LoginSignup ls = new LoginSignup();
+    TransferMoney transfer = new TransferMoney();
+    AccountInfo accountInfo;
 
     //it is declared to convert show bal to hide bal and from hide bal to show bal in the home page
     private boolean isBalanceShown = true;
@@ -56,26 +62,6 @@ public class HomePage extends javax.swing.JFrame {
         register.setSelectedIndex(1);
     }
 
-    //For sending all the details to LoginSignup page collected from textfields for signup process
-//    public LoginSignup.UserInfo getUserInfo() {
-//        String fullName = fullNameText.getText();
-//        String fatherName = fatherNameText.getText();
-//        String motherName = motherNameText.getText();
-//        String aadhar = aadharText.getText();
-//        String mobile = mobileText.getText();
-//        String email = emailText.getText();
-//        String signupUsername = signupUsernameText.getText();
-//
-//        Date dob = dobText.getDate();
-//        java.sql.Date sqlDob = (dob != null) ? new java.sql.Date(dob.getTime()) : null;
-//
-//        String gender = (String) genderText.getSelectedItem();
-//        String country = (String) countryText.getSelectedItem();
-//
-//        String pin = new String(pinText.getPassword());
-//
-//        return new LoginSignup.UserInfo(fullName, fatherName, motherName, aadhar, mobile, email, signupUsername, sqlDob, gender, country, pin);
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,7 +171,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
+        ifscLabel = new javax.swing.JLabel();
         accountUsername = new javax.swing.JLabel();
         accountNumber = new javax.swing.JLabel();
         personalDetails = new javax.swing.JPanel();
@@ -214,16 +200,16 @@ public class HomePage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tmAcNo = new javax.swing.JTextField();
         jLabel62 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tmCfAcNo = new javax.swing.JTextField();
         jLabel63 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tmIfsc = new javax.swing.JTextField();
         jLabel64 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        tmFullName = new javax.swing.JTextField();
         jLabel65 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        tmAmount = new javax.swing.JTextField();
+        tmDesc = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
@@ -330,9 +316,19 @@ public class HomePage extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Eras Demi ITC", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 204, 204));
         jButton4.setText("SIGNIN");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton4KeyPressed(evt);
             }
         });
         jPanel7.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 120, 40));
@@ -847,8 +843,8 @@ public class HomePage extends javax.swing.JFrame {
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_protect_20px.png"))); // NOI18N
         bankDetails.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 20, 20));
 
-        jLabel50.setText("OBSA000044");
-        bankDetails.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 160, -1));
+        ifscLabel.setText("OBSA000044");
+        bankDetails.add(ifscLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 160, -1));
 
         accountUsername.setText("ashwani_44");
         bankDetails.add(accountUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 160, -1));
@@ -924,11 +920,13 @@ public class HomePage extends javax.swing.JFrame {
         personalDetails.add(personalCountryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 180, -1));
 
         editContact.setBackground(new java.awt.Color(255, 210, 204));
+        editContact.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         editContact.setText("+91 9039477540");
         editContact.setBorder(null);
         personalDetails.add(editContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 230, 20));
 
         editEmail.setBackground(new java.awt.Color(255, 210, 204));
+        editEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         editEmail.setText("ashwanidwivedi7898@gmail.com");
         editEmail.setBorder(null);
         editEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -956,39 +954,39 @@ public class HomePage extends javax.swing.JFrame {
         jLabel58.setText("Account number :");
         jPanel1.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 25));
 
-        jTextField2.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 190, 25));
+        tmAcNo.setBackground(new java.awt.Color(255, 210, 204));
+        jPanel1.add(tmAcNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 190, 25));
 
         jLabel62.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel62.setText("Confirm account number :");
         jPanel1.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 25));
 
-        jTextField3.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 190, 25));
+        tmCfAcNo.setBackground(new java.awt.Color(255, 210, 204));
+        jPanel1.add(tmCfAcNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 190, 25));
 
         jLabel63.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel63.setText("IFSC Code :");
         jPanel1.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 25));
 
-        jTextField4.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 190, 25));
+        tmIfsc.setBackground(new java.awt.Color(255, 210, 204));
+        jPanel1.add(tmIfsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 190, 25));
 
         jLabel64.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel64.setText("Full Name :");
         jPanel1.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 25));
 
-        jTextField5.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 190, 25));
+        tmFullName.setBackground(new java.awt.Color(255, 210, 204));
+        jPanel1.add(tmFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 190, 25));
 
         jLabel65.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel65.setText("Enter Amount :");
         jPanel1.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, 25));
 
-        jTextField6.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 190, 25));
+        tmAmount.setBackground(new java.awt.Color(255, 210, 204));
+        jPanel1.add(tmAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 190, 25));
 
-        jTextField7.setBackground(new java.awt.Color(255, 210, 204));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 190, 25));
+        tmDesc.setBackground(new java.awt.Color(255, 210, 204));
+        jPanel1.add(tmDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 190, 25));
 
         jLabel66.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel66.setText("Description :");
@@ -997,6 +995,11 @@ public class HomePage extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 210, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Send");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 80, -1));
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_exchange_30px.png"))); // NOI18N
@@ -1098,8 +1101,19 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        login.setSelectedIndex(0);
-        register.setSelectedIndex(1);
+        int response = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure?", // message to display
+                "Confirm", // title of the dialog
+                JOptionPane.YES_NO_OPTION, // options for the dialog (Yes and No)
+                JOptionPane.QUESTION_MESSAGE // message type (optional)
+        );
+        if (response == JOptionPane.YES_OPTION) {
+            login.setSelectedIndex(0);
+            register.setSelectedIndex(1);
+            ls.clearSignin();
+            ls.clearSignup();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1158,10 +1172,17 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_signupSubmitButtonActionPerformed
 
     private void signinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinButtonActionPerformed
+        loginUserName = loginUsernameText.getText();
+        accountInfo = new AccountInfo();
+        AccountInfo.Details details = accountInfo.getAccountInfoByUsername(loginUserName);
         if (!ls.loginValidation()) {
             JOptionPane.showMessageDialog(null, "Validation failed");
         } else {
             ls.loginUser();
+            transfer.removeTransferLabel();
+            if (details != null) {
+                details.setDetailsOnLabel();
+            }
         }
     }//GEN-LAST:event_signinButtonActionPerformed
 
@@ -1175,8 +1196,21 @@ public class HomePage extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         //this will give the command to the login page
-        content.setSelectedIndex(0);
-        initialization();
+
+        int response = JOptionPane.showConfirmDialog(
+                null,
+                "Do you want to proceed?", // message to display
+                "Confirm", // title of the dialog
+                JOptionPane.YES_NO_OPTION, // options for the dialog (Yes and No)
+                JOptionPane.QUESTION_MESSAGE // message type (optional)
+        );
+        if (response == JOptionPane.YES_OPTION) {
+            content.setSelectedIndex(0);
+            initialization();
+            ls.clearSignin();
+            ls.clearSignup();
+        }
+
     }//GEN-LAST:event_logoutMouseClicked
 
     private void accountEditOptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountEditOptionMouseClicked
@@ -1190,11 +1224,13 @@ public class HomePage extends javax.swing.JFrame {
     private void aboutMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutMenuMouseClicked
         //Opens the Welcome Page About Page
         welcomeMainContent.setSelectedIndex(4);
+        transfer.removeTransferLabel();
     }//GEN-LAST:event_aboutMenuMouseClicked
 
     private void transactionMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMenuMouseClicked
         //Opens the Welcome Page Transaction Page
         welcomeMainContent.setSelectedIndex(3);
+        transfer.removeTransferLabel();
     }//GEN-LAST:event_transactionMenuMouseClicked
 
     private void transferMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transferMenuMouseClicked
@@ -1206,15 +1242,18 @@ public class HomePage extends javax.swing.JFrame {
         //Opens the Welcome Page Account Page
         welcomeMainContent.setSelectedIndex(1);
         savePersonalDetails.setVisible(false);
+        transfer.removeTransferLabel();
     }//GEN-LAST:event_accountMenuMouseClicked
 
     private void homeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMenuMouseClicked
         //Opens the Welcome Page Home Page
         welcomeMainContent.setSelectedIndex(0);
+        transfer.removeTransferLabel();
     }//GEN-LAST:event_homeMenuMouseClicked
 
     private void addMoneyMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMoneyMenuMouseClicked
         //Opens the Dialogbox to add the money
+        transfer.removeTransferLabel();
         AddMoneyDialog dialog = new AddMoneyDialog(new javax.swing.JFrame(), true);
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -1224,11 +1263,15 @@ public class HomePage extends javax.swing.JFrame {
         });
         dialog.setLocationRelativeTo(this); //this is for not performing any operation in frame 1 as dialog box is opened
         dialog.setVisible(true);
+        
     }//GEN-LAST:event_addMoneyMenuMouseClicked
 
     private void homeShowBalanceLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeShowBalanceLabelMouseClicked
         // TODO add your handling code here:
-        toggleBalance(5438.36f);
+        AccountInfo.Details details = accountInfo.getAccountInfoByUsername(loginUserName);
+        if (details != null) {
+            toggleBalance(details.getAccountBalance());
+        }
     }//GEN-LAST:event_homeShowBalanceLabelMouseClicked
 
     private void homeSeeMoreTransactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeSeeMoreTransactionMouseClicked
@@ -1257,6 +1300,27 @@ public class HomePage extends javax.swing.JFrame {
         welcomeMainContent.setSelectedIndex(1);
         savePersonalDetails.setVisible(false);
     }//GEN-LAST:event_homeAccountNumberLabelMouseClicked
+
+    private void jButton4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4KeyPressed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String toAccountNumber = tmAcNo.getText();
+        String confirmToAccountNumber = tmCfAcNo.getText();
+        String ifscCode = tmIfsc.getText();
+        String fullName = tmFullName.getText();
+        Double amount = Double.parseDouble(tmAmount.getText());
+        String description = tmDesc.getText();
+        
+        transfer.transferMoney(LoginSignup.currentAccountId,toAccountNumber,confirmToAccountNumber,ifscCode,fullName,amount,description);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1295,9 +1359,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel aboutPanel;
     private javax.swing.JLabel accountEditOption;
     private javax.swing.JLabel accountMenu;
-    private javax.swing.JLabel accountNumber;
+    protected static javax.swing.JLabel accountNumber;
     private javax.swing.JPanel accountPanel;
-    private javax.swing.JLabel accountUsername;
+    protected static javax.swing.JLabel accountUsername;
     private javax.swing.JLabel addMoneyMenu;
     private javax.swing.JPanel bankDetails;
     protected static javax.swing.JPasswordField cnfPinText;
@@ -1305,17 +1369,17 @@ public class HomePage extends javax.swing.JFrame {
     protected static javax.swing.JComboBox<String> countryText;
     protected static javax.swing.JLabel dateLabel;
     protected static com.toedter.calendar.JDateChooser dobText;
-    private javax.swing.JTextField editContact;
-    private javax.swing.JTextField editEmail;
+    protected static javax.swing.JTextField editContact;
+    protected static javax.swing.JTextField editEmail;
     protected static javax.swing.JTextField emailText;
-    private javax.swing.JLabel fatherLabel;
+    protected static javax.swing.JLabel fatherLabel;
     protected static javax.swing.JTextField fatherNameText;
     protected static javax.swing.JTextField fullNameText;
     protected static javax.swing.JComboBox<String> genderText;
     private javax.swing.JPanel headerPane;
     private javax.swing.JLabel homeAccountBalance;
     private javax.swing.JLabel homeAccountIconLabel;
-    private javax.swing.JLabel homeAccountNumberLabel;
+    protected static javax.swing.JLabel homeAccountNumberLabel;
     private javax.swing.JPanel homeAccountPannel;
     private javax.swing.JLabel homeAddMoneyLabel;
     private javax.swing.JLabel homeMenu;
@@ -1328,6 +1392,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel homeTransactionName1;
     private javax.swing.JLabel homeTransactionName2;
     private javax.swing.JPanel homeTransactionPanel;
+    protected static javax.swing.JLabel ifscLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1373,7 +1438,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
@@ -1403,34 +1467,34 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     protected static javax.swing.JTabbedPane login;
     private javax.swing.JPanel loginSignup;
     protected static javax.swing.JTextField loginUsernameText;
     private javax.swing.JLabel logout;
     private javax.swing.JPanel menuBar;
     protected static javax.swing.JTextField mobileText;
-    private javax.swing.JLabel motherLabel;
+    protected static javax.swing.JLabel motherLabel;
     protected static javax.swing.JTextField motherNameText;
     private javax.swing.JButton nextButton;
     protected static javax.swing.JPasswordField passwordText;
-    private javax.swing.JLabel personalAadharLabel;
-    private javax.swing.JLabel personalCountryLabel;
-    private javax.swing.JLabel personalDOB;
+    protected static javax.swing.JLabel personalAadharLabel;
+    protected static javax.swing.JLabel personalCountryLabel;
+    protected static javax.swing.JLabel personalDOB;
     private javax.swing.JPanel personalDetails;
-    private javax.swing.JLabel personalGender;
-    private javax.swing.JLabel personalNameLabel;
+    protected static javax.swing.JLabel personalGender;
+    protected static javax.swing.JLabel personalNameLabel;
     protected static javax.swing.JPasswordField pinText;
     protected static javax.swing.JTabbedPane register;
     private javax.swing.JButton savePersonalDetails;
     private javax.swing.JButton signinButton;
     private javax.swing.JButton signupSubmitButton;
     protected static javax.swing.JTextField signupUsernameText;
+    protected static javax.swing.JTextField tmAcNo;
+    protected static javax.swing.JTextField tmAmount;
+    protected static javax.swing.JTextField tmCfAcNo;
+    protected static javax.swing.JTextField tmDesc;
+    protected static javax.swing.JTextField tmFullName;
+    protected static javax.swing.JTextField tmIfsc;
     private javax.swing.JLabel transactionMenu;
     private javax.swing.JPanel transactionPanel;
     private javax.swing.JScrollPane transactionTable;
@@ -1439,7 +1503,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel welcome;
     protected static javax.swing.JTabbedPane welcomeMainContent;
     private javax.swing.JPanel welcomeMainPagePanel;
-    private javax.swing.JLabel welcomeName;
+    protected static javax.swing.JLabel welcomeName;
     private javax.swing.JLabel welcomeName1;
     // End of variables declaration//GEN-END:variables
 }

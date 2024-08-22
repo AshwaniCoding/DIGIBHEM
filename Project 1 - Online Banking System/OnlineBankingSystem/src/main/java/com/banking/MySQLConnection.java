@@ -98,7 +98,8 @@ public class MySQLConnection {
                     "to_account_id INT, " +
                     "transaction_type ENUM('deposit', 'withdrawal', 'transfer') NOT NULL, " +
                     "amount DECIMAL(15, 2) NOT NULL, " +
-                    "balance_after DECIMAL(15, 2) NOT NULL, " +
+                    "balance_after_sender DECIMAL(15, 2), " +
+                    "balance_after_receiver DECIMAL(15, 2), " +
                     "description VARCHAR(255), " +
                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                     "FOREIGN KEY (account_id) REFERENCES Accounts(account_id), " +

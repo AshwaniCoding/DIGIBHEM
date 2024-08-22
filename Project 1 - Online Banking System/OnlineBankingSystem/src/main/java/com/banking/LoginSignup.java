@@ -4,6 +4,7 @@
  */
 package com.banking;
 
+import com.banking.AccountInfo.Details;
 import static com.banking.HomePage.content;
 import static com.banking.HomePage.setDateToLabel;
 import static com.banking.HomePage.welcomeMainContent;
@@ -20,6 +21,8 @@ import javax.swing.border.Border;
  * @author Ashu
  */
 public class LoginSignup {
+    
+    public static int currentAccountId = -1;
 
     //----------------------------------Signup Part----------------------
     //Function to validate the Signup first page of validation
@@ -245,7 +248,7 @@ public class LoginSignup {
     }
 
     //Function to clear all the values after successful signup
-    private void clearSignup() {
+    public void clearSignup() {
         HomePage.fullNameText.setText("");
         HomePage.fatherNameText.setText("");
         HomePage.motherNameText.setText("");
@@ -258,6 +261,12 @@ public class LoginSignup {
         HomePage.countryText.setSelectedItem(0);
         HomePage.pinText.setText("");
         HomePage.cnfPinText.setText("");
+    }
+    
+    //Function to clear all the values from signin page
+    public void clearSignin() {
+        HomePage.loginUsernameText.setText("");
+        HomePage.passwordText.setText("");
     }
 
     //----------------------------------Login Part----------------------
@@ -295,39 +304,55 @@ public class LoginSignup {
         return true;
     }
 
+    
     public void loginUser() {
-//        loginInfo();
-        ResultSet rs = null;
-        String query = "SELECT * FROM users WHERE username = ? AND pin = ?";
+    ResultSet rs = null;
+    String query = "SELECT * FROM users WHERE username = ? AND pin = ?";
 
-        try (Connection connection = MySQLConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+    try (Connection connection = MySQLConnection.getConnection(); 
+         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, getLoginUsername());
-            preparedStatement.setString(2, getLoginPassword());
+        preparedStatement.setString(1, getLoginUsername());
+        preparedStatement.setString(2, getLoginPassword());
 
-            rs = preparedStatement.executeQuery();
+        rs = preparedStatement.executeQuery();
 
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Login Successful");
-                content.setSelectedIndex(1);
-                welcomeMainContent.setSelectedIndex(0);
-                setDateToLabel();
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid username or PIN");
+        if (rs.next()) {
+            // Retrieve and store the user_id and account_id
+            int userId = rs.getInt("user_id");
+            String getAccountIdQuery = "SELECT account_id FROM Accounts WHERE user_id = ?";
+            
+            try (PreparedStatement accountStmt = connection.prepareStatement(getAccountIdQuery)) {
+                accountStmt.setInt(1, userId);
+                ResultSet accountRs = accountStmt.executeQuery();
+                
+                if (accountRs.next()) {
+                    LoginSignup.currentAccountId = accountRs.getInt("account_id"); // Store account ID
+                } else {
+                    JOptionPane.showMessageDialog(null, "No account found for this user.");
+                    return;
+                }
             }
 
-        } catch (Exception e) { // Print the stack trace for debugging purposes
-            // Print the stack trace for debugging purposes
-            JOptionPane.showMessageDialog(null, "An error occurred during login");
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (Exception e) {
-                    // Print the stack trace for debugging purposes
-                    
-                }
+            JOptionPane.showMessageDialog(null, "Login Successful");
+            content.setSelectedIndex(1);
+            welcomeMainContent.setSelectedIndex(0);
+            setDateToLabel();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or PIN");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace(); // Print the stack trace for debugging purposes
+        JOptionPane.showMessageDialog(null, "An error occurred during login");
+    } finally {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (Exception e) {
+                e.printStackTrace(); // Print the stack trace for debugging purposes
             }
         }
     }
+}
 }
