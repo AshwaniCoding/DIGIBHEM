@@ -10,7 +10,10 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +34,8 @@ public class HomePage extends javax.swing.JFrame {
     LoginSignup ls = new LoginSignup();
     TransferMoney transfer = new TransferMoney();
     AccountInfo accountInfo;
+    Transactions transactions;
+    DefaultTableModel tableModel;
 
     //it is declared to convert show bal to hide bal and from hide bal to show bal in the home page
     private boolean isBalanceShown = true;
@@ -216,7 +221,7 @@ public class HomePage extends javax.swing.JFrame {
         transactionPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         transactionTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        transactionsTable = new javax.swing.JTable();
         jLabel60 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         aboutPanel = new javax.swing.JPanel();
@@ -1015,10 +1020,10 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 210, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(255, 204, 204));
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(51, 0, 25));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        transactionsTable.setBackground(new java.awt.Color(255, 204, 204));
+        transactionsTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        transactionsTable.setForeground(new java.awt.Color(51, 0, 25));
+        transactionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -1040,22 +1045,23 @@ public class HomePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setOpaque(false);
-        jTable1.setRowHeight(30);
-        jTable1.setShowGrid(false);
-        transactionTable.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(60);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(280);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        transactionsTable.setOpaque(false);
+        transactionsTable.setRequestFocusEnabled(false);
+        transactionsTable.setRowHeight(30);
+        transactionsTable.setShowGrid(false);
+        transactionTable.setViewportView(transactionsTable);
+        if (transactionsTable.getColumnModel().getColumnCount() > 0) {
+            transactionsTable.getColumnModel().getColumn(0).setResizable(false);
+            transactionsTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            transactionsTable.getColumnModel().getColumn(1).setResizable(false);
+            transactionsTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            transactionsTable.getColumnModel().getColumn(2).setResizable(false);
+            transactionsTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+            transactionsTable.getColumnModel().getColumn(3).setResizable(false);
+            transactionsTable.getColumnModel().getColumn(3).setPreferredWidth(35);
+            transactionsTable.getColumnModel().getColumn(4).setResizable(false);
+            transactionsTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            transactionsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jPanel2.add(transactionTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 580, 260));
@@ -1103,10 +1109,10 @@ public class HomePage extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int response = JOptionPane.showConfirmDialog(
                 null,
-                "Are you sure?", // message to display
-                "Confirm", // title of the dialog
-                JOptionPane.YES_NO_OPTION, // options for the dialog (Yes and No)
-                JOptionPane.QUESTION_MESSAGE // message type (optional)
+                "Are you sure?", 
+                "Confirm", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE 
         );
         if (response == JOptionPane.YES_OPTION) {
             login.setSelectedIndex(0);
@@ -1199,10 +1205,10 @@ public class HomePage extends javax.swing.JFrame {
 
         int response = JOptionPane.showConfirmDialog(
                 null,
-                "Do you want to proceed?", // message to display
-                "Confirm", // title of the dialog
-                JOptionPane.YES_NO_OPTION, // options for the dialog (Yes and No)
-                JOptionPane.QUESTION_MESSAGE // message type (optional)
+                "Do you want to proceed?", 
+                "Confirm", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE 
         );
         if (response == JOptionPane.YES_OPTION) {
             content.setSelectedIndex(0);
@@ -1229,8 +1235,30 @@ public class HomePage extends javax.swing.JFrame {
 
     private void transactionMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMenuMouseClicked
         //Opens the Welcome Page Transaction Page
+        
         welcomeMainContent.setSelectedIndex(3);
         transfer.removeTransferLabel();
+        
+        transactions = new Transactions();
+        tableModel = (DefaultTableModel) transactionsTable.getModel();
+        tableModel.setRowCount(0);  
+
+        // Fetch the transactions for the given username
+        List<Transactions.TransactionDetails> transactionList = transactions.getTransactionsByUsername(loginUserName);
+
+        // Populate the table with transaction data
+        int j=1;
+        for (int i=transactionList.size()-1;i>0;i--){
+            tableModel.addRow(new Object[]{
+                j++,
+                transactionList.get(i).getDate(),           
+                transactionList.get(i).getName(),           
+                transactionList.get(i).getTransactionType(),
+                transactionList.get(i).getAmount(),         
+                transactionList.get(i).getBalanceAfter()    
+            });
+        }
+        
     }//GEN-LAST:event_transactionMenuMouseClicked
 
     private void transferMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transferMenuMouseClicked
@@ -1377,7 +1405,7 @@ public class HomePage extends javax.swing.JFrame {
     protected static javax.swing.JTextField fullNameText;
     protected static javax.swing.JComboBox<String> genderText;
     private javax.swing.JPanel headerPane;
-    private javax.swing.JLabel homeAccountBalance;
+    protected static javax.swing.JLabel homeAccountBalance;
     private javax.swing.JLabel homeAccountIconLabel;
     protected static javax.swing.JLabel homeAccountNumberLabel;
     private javax.swing.JPanel homeAccountPannel;
@@ -1465,7 +1493,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     protected static javax.swing.JTabbedPane login;
     private javax.swing.JPanel loginSignup;
@@ -1498,6 +1525,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel transactionMenu;
     private javax.swing.JPanel transactionPanel;
     private javax.swing.JScrollPane transactionTable;
+    private javax.swing.JTable transactionsTable;
     private javax.swing.JLabel transferMenu;
     private javax.swing.JPanel transferPanel;
     private javax.swing.JPanel welcome;

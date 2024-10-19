@@ -72,7 +72,7 @@ public class AccountInfo {
         
         //Function to set all the values from SQL to Account Page 
         public void setDetailsOnLabel() {
-            HomePage.welcomeName.setText("Hi," + getFirstName());
+            HomePage.welcomeName.setText("Hi, " + getFirstName());
             HomePage.homeAccountNumberLabel.setText("XXXX " + getAccountNumberLast4Digits());
             HomePage.accountUsername.setText(name);
             HomePage.accountNumber.setText(accountNumber);
@@ -85,6 +85,7 @@ public class AccountInfo {
             HomePage.editContact.setText(phoneNumber);
             HomePage.editEmail.setText(email);
             HomePage.personalAadharLabel.setText(aadharNumber);
+            HomePage.homeAccountBalance.setText("* * * *");
         }
 
     }
