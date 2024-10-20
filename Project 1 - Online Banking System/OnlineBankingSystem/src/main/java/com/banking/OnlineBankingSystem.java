@@ -18,8 +18,8 @@ public class OnlineBankingSystem {
         java.awt.EventQueue.invokeLater(() -> {
             new HomePage().setVisible(true);
         });
+        ConfigReader.initConfig();
         createDatabaseAndTables();
-        createTrigger();
     }
     
     

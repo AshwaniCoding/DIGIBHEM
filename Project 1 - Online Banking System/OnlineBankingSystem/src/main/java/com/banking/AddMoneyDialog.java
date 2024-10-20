@@ -31,8 +31,8 @@ public class AddMoneyDialog extends javax.swing.JDialog {
     
     public void addMoney(int accountId, double amount, String description) {
         String updateBalanceSQL = "UPDATE Accounts SET balance = balance + ? WHERE account_id = ?";
-        String insertTransactionSQL = "INSERT INTO Transactions (account_id, transaction_type, amount, balance_after_sender, description) " +
-                                      "VALUES (?, 'deposit', ?, ?, ?)";
+        String insertTransactionSQL = "INSERT INTO Transactions (account_id, to_account_id, transaction_type, amount, balance_after_sender, description) " +
+                                      "VALUES (?,?,'deposit', ?, ?, ?)";
 
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement updateBalanceStmt = connection.prepareStatement(updateBalanceSQL);
@@ -56,9 +56,10 @@ public class AddMoneyDialog extends javax.swing.JDialog {
 
             // Insert transaction record
             insertTransactionStmt.setInt(1, accountId);
-            insertTransactionStmt.setDouble(2, amount);
-            insertTransactionStmt.setDouble(3, newBalance);
-            insertTransactionStmt.setString(4, description);
+            insertTransactionStmt.setInt(2, accountId);
+            insertTransactionStmt.setDouble(3, amount);
+            insertTransactionStmt.setDouble(4, newBalance);
+            insertTransactionStmt.setString(5, description);
             insertTransactionStmt.executeUpdate();
 
             // Commit transaction
@@ -169,6 +170,7 @@ public class AddMoneyDialog extends javax.swing.JDialog {
         String description = descriptionAddMoney.getText();
         
         addMoney(LoginSignup.currentAccountId,newMoney,description);
+        new Transactions().transactionData();
     }//GEN-LAST:event_addAmountButtonActionPerformed
 
     /**

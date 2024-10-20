@@ -7,6 +7,7 @@ package com.banking;
 import static com.banking.HomePage.content;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -34,8 +35,7 @@ public class HomePage extends javax.swing.JFrame {
     LoginSignup ls = new LoginSignup();
     TransferMoney transfer = new TransferMoney();
     AccountInfo accountInfo;
-    Transactions transactions;
-    DefaultTableModel tableModel;
+    Transactions transactions = new Transactions();
 
     //it is declared to convert show bal to hide bal and from hide bal to show bal in the home page
     private boolean isBalanceShown = true;
@@ -1025,20 +1025,20 @@ public class HomePage extends javax.swing.JFrame {
         transactionsTable.setForeground(new java.awt.Color(51, 0, 25));
         transactionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "S.No", "Date", "Name", "CR/DR", "Amount", "Bal After"
+                "Date", "Name", "CR/DR", "Amount", "Bal After"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1049,19 +1049,18 @@ public class HomePage extends javax.swing.JFrame {
         transactionsTable.setRequestFocusEnabled(false);
         transactionsTable.setRowHeight(30);
         transactionsTable.setShowGrid(false);
+        transactionsTable.getTableHeader().setReorderingAllowed(false);
         transactionTable.setViewportView(transactionsTable);
         if (transactionsTable.getColumnModel().getColumnCount() > 0) {
             transactionsTable.getColumnModel().getColumn(0).setResizable(false);
-            transactionsTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            transactionsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             transactionsTable.getColumnModel().getColumn(1).setResizable(false);
-            transactionsTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            transactionsTable.getColumnModel().getColumn(1).setPreferredWidth(200);
             transactionsTable.getColumnModel().getColumn(2).setResizable(false);
-            transactionsTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+            transactionsTable.getColumnModel().getColumn(2).setPreferredWidth(35);
             transactionsTable.getColumnModel().getColumn(3).setResizable(false);
-            transactionsTable.getColumnModel().getColumn(3).setPreferredWidth(35);
+            transactionsTable.getColumnModel().getColumn(3).setPreferredWidth(50);
             transactionsTable.getColumnModel().getColumn(4).setResizable(false);
-            transactionsTable.getColumnModel().getColumn(4).setPreferredWidth(50);
-            transactionsTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jPanel2.add(transactionTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 580, 260));
@@ -1239,26 +1238,7 @@ public class HomePage extends javax.swing.JFrame {
         welcomeMainContent.setSelectedIndex(3);
         transfer.removeTransferLabel();
         
-        transactions = new Transactions();
-        tableModel = (DefaultTableModel) transactionsTable.getModel();
-        tableModel.setRowCount(0);  
-
-        // Fetch the transactions for the given username
-        List<Transactions.TransactionDetails> transactionList = transactions.getTransactionsByUsername(loginUserName);
-
-        // Populate the table with transaction data
-        int j=1;
-        for (int i=transactionList.size()-1;i>0;i--){
-            tableModel.addRow(new Object[]{
-                j++,
-                transactionList.get(i).getDate(),           
-                transactionList.get(i).getName(),           
-                transactionList.get(i).getTransactionType(),
-                transactionList.get(i).getAmount(),         
-                transactionList.get(i).getBalanceAfter()    
-            });
-        }
-        
+        transactions.transactionData();
     }//GEN-LAST:event_transactionMenuMouseClicked
 
     private void transferMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transferMenuMouseClicked
@@ -1292,6 +1272,8 @@ public class HomePage extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(this); //this is for not performing any operation in frame 1 as dialog box is opened
         dialog.setVisible(true);
         
+        transactions.getTwotransactionData();
+        
     }//GEN-LAST:event_addMoneyMenuMouseClicked
 
     private void homeShowBalanceLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeShowBalanceLabelMouseClicked
@@ -1305,6 +1287,7 @@ public class HomePage extends javax.swing.JFrame {
     private void homeSeeMoreTransactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeSeeMoreTransactionMouseClicked
         //Opens the Welcome Page Transaction Page
         welcomeMainContent.setSelectedIndex(3);
+        transactions.transactionData();
     }//GEN-LAST:event_homeSeeMoreTransactionMouseClicked
 
     private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
@@ -1347,6 +1330,8 @@ public class HomePage extends javax.swing.JFrame {
         String description = tmDesc.getText();
         
         transfer.transferMoney(LoginSignup.currentAccountId,toAccountNumber,confirmToAccountNumber,ifscCode,fullName,amount,description);
+        
+        transactions.getTwotransactionData();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1415,10 +1400,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel homePayPanel;
     private javax.swing.JLabel homeSeeMoreTransaction;
     private javax.swing.JLabel homeShowBalanceLabel;
-    private javax.swing.JLabel homeTransactionAmount1;
-    private javax.swing.JLabel homeTransactionAmount2;
-    private javax.swing.JLabel homeTransactionName1;
-    private javax.swing.JLabel homeTransactionName2;
+    protected static javax.swing.JLabel homeTransactionAmount1;
+    protected static javax.swing.JLabel homeTransactionAmount2;
+    protected static javax.swing.JLabel homeTransactionName1;
+    protected static javax.swing.JLabel homeTransactionName2;
     private javax.swing.JPanel homeTransactionPanel;
     protected static javax.swing.JLabel ifscLabel;
     private javax.swing.JButton jButton1;
@@ -1525,7 +1510,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel transactionMenu;
     private javax.swing.JPanel transactionPanel;
     private javax.swing.JScrollPane transactionTable;
-    private javax.swing.JTable transactionsTable;
+    protected static javax.swing.JTable transactionsTable;
     private javax.swing.JLabel transferMenu;
     private javax.swing.JPanel transferPanel;
     private javax.swing.JPanel welcome;

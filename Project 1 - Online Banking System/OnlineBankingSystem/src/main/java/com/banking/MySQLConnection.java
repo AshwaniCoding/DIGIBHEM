@@ -17,7 +17,7 @@ public class MySQLConnection {
 
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306";
-    private static final String URL1 = "jdbc:mysql://localhost:3306/bankingapplication";
+    private static final String URL1 = "jdbc:mysql://localhost:3306/" + ConfigReader.getConfigValue("database.name");
     private static final String USER = "root";
     private static final String PASSWORD = ""; 
     
@@ -52,11 +52,11 @@ public class MySQLConnection {
              Statement statement = connection.createStatement()){
             // Create Database
             
-            String createDatabase = "CREATE DATABASE IF NOT EXISTS bankingApplication";
+            String createDatabase = "CREATE DATABASE IF NOT EXISTS " + ConfigReader.getConfigValue("database.name");
             statement.executeUpdate(createDatabase);
 
             // Use the newly created database
-            String useDatabase = "USE bankingApplication";
+            String useDatabase = "USE " + ConfigReader.getConfigValue("database.name");
             statement.executeUpdate(useDatabase);
 
             // Create Users table with additional columns
@@ -111,26 +111,32 @@ public class MySQLConnection {
             System.out.println("SQL exception occurred. Check output console.");
             e.printStackTrace();
         }
+        
+        createTrigger();
     }
     
     //function to create a trigger which automatically takes as a row when new user created
     public static void createTrigger() {
-        String triggerSQL
-                = "CREATE TRIGGER after_user_insert\n"
-                + "AFTER INSERT ON Users\n"
-                + "FOR EACH ROW\n"
-                + "BEGIN\n"
-                + "    DECLARE account_number VARCHAR(20);\n"
-                + "    SET account_number = CONCAT('ACC', NEW.user_id, LPAD(FLOOR(RAND() * 1000000), 6, '0'));\n"
-                + "    INSERT INTO Accounts (user_id, account_number, account_type, IFSC_code, balance)\n"
-                + "    VALUES (NEW.user_id, account_number, 'Savings', 'OBSA000044', 0.00);\n"
-                + "END";
+    // Trigger for creating an account after a new user is inserted
+    String triggerSQLAccount = "CREATE TRIGGER IF NOT EXISTS after_user_insert\n"
+            + "AFTER INSERT ON Users\n"
+            + "FOR EACH ROW\n"
+            + "BEGIN\n"
+            + "    DECLARE account_number VARCHAR(20);\n"
+            + "    SET account_number = CONCAT('ACC', NEW.user_id, LPAD(FLOOR(RAND() * 1000000), 6, '0'));\n"
+            + "    INSERT INTO Accounts (user_id, account_number, account_type, IFSC_code, balance)\n"
+            + "    VALUES (NEW.user_id, account_number, 'Savings', 'OBSA000044', 0.00);\n"
+            + "END";
 
-        try (Connection connection = MySQLConnection.getConnection(); Statement statement = connection.createStatement()) {
-            // Execute the trigger creation SQL
-            statement.execute(triggerSQL);
-            System.out.println("Trigger created successfully");
-        } catch (SQLException e) {
-        }
+
+    try (Connection connection = MySQLConnection.getConnection(); Statement statement = connection.createStatement()) {
+        // Execute both trigger creation SQLs
+        statement.execute(triggerSQLAccount);
+        System.out.println("Triggers created successfully");
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    
+}
+
 }

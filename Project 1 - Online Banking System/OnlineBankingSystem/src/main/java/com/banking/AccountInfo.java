@@ -18,6 +18,8 @@ import java.util.Date;
 public class AccountInfo {
 
     public static class Details {
+        
+        Transactions transactions = new Transactions();
 
         private String name;
         private String fatherName;
@@ -86,6 +88,8 @@ public class AccountInfo {
             HomePage.editEmail.setText(email);
             HomePage.personalAadharLabel.setText(aadharNumber);
             HomePage.homeAccountBalance.setText("* * * *");
+            
+            transactions.getTwotransactionData();
         }
 
     }
