@@ -18,8 +18,8 @@ public class MySQLConnection {
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306";
     private static final String URL1 = "jdbc:mysql://localhost:3306/" + ConfigReader.getConfigValue("database.name");
-    private static final String USER = "root";
-    private static final String PASSWORD = ""; 
+    private static final String USER = ConfigReader.getConfigValue("database.username");
+    private static final String PASSWORD = ConfigReader.getConfigValue("database.password"); 
     
 
     public static Connection getConnection() throws SQLException {
