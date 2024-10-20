@@ -89,7 +89,10 @@ public class AccountInfo {
             HomePage.personalAadharLabel.setText(aadharNumber);
             HomePage.homeAccountBalance.setText("* * * *");
             
-            transactions.getTwotransactionData();
+            try {
+                transactions.getTwotransactionData();
+            } catch (Exception e) {
+            }
         }
 
     }

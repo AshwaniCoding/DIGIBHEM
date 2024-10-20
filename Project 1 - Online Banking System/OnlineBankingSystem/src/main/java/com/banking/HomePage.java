@@ -794,24 +794,24 @@ public class HomePage extends javax.swing.JFrame {
 
         homeTransactionName1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         homeTransactionName1.setForeground(new java.awt.Color(255, 255, 255));
-        homeTransactionName1.setText("Akash Gupta");
+        homeTransactionName1.setText(" ");
         homeTransactionPanel.add(homeTransactionName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 63, 160, -1));
 
         homeTransactionName2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         homeTransactionName2.setForeground(new java.awt.Color(255, 255, 255));
-        homeTransactionName2.setText("Priya Kashyap");
+        homeTransactionName2.setText(" ");
         homeTransactionPanel.add(homeTransactionName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 97, 160, -1));
 
         homeTransactionAmount1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeTransactionAmount1.setForeground(new java.awt.Color(255, 255, 255));
         homeTransactionAmount1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        homeTransactionAmount1.setText("$45.21 CR");
+        homeTransactionAmount1.setText(" ");
         homeTransactionPanel.add(homeTransactionAmount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 63, 65, -1));
 
         homeTransactionAmount2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         homeTransactionAmount2.setForeground(new java.awt.Color(255, 255, 255));
         homeTransactionAmount2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        homeTransactionAmount2.setText("$85.64 DR");
+        homeTransactionAmount2.setText(" ");
         homeTransactionPanel.add(homeTransactionAmount2, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 97, 65, -1));
 
         jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_transaction_20px.png"))); // NOI18N
@@ -1272,7 +1272,10 @@ public class HomePage extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(this); //this is for not performing any operation in frame 1 as dialog box is opened
         dialog.setVisible(true);
         
-        transactions.getTwotransactionData();
+        try {
+            transactions.getTwotransactionData();
+        } catch (Exception e) {
+        }
         
     }//GEN-LAST:event_addMoneyMenuMouseClicked
 
@@ -1331,7 +1334,10 @@ public class HomePage extends javax.swing.JFrame {
         
         transfer.transferMoney(LoginSignup.currentAccountId,toAccountNumber,confirmToAccountNumber,ifscCode,fullName,amount,description);
         
-        transactions.getTwotransactionData();
+        try {
+            transactions.getTwotransactionData();
+        } catch (Exception e) {
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

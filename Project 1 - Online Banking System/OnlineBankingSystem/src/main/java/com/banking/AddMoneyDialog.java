@@ -64,7 +64,7 @@ public class AddMoneyDialog extends javax.swing.JDialog {
 
             // Commit transaction
             connection.commit();
-            JOptionPane.showMessageDialog(null, "Money added successfully. New Balance: " + newBalance);
+            JOptionPane.showMessageDialog(null, "Money added successfully.");
             addAmount.setText("");
             descriptionAddMoney.setText("");
         } catch (SQLException e) {
