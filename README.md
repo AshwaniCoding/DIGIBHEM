@@ -3,6 +3,8 @@
 ## Overview
 
 The **Online Banking System** is a secure desktop application built using Java Swing, designed to facilitate online banking operations for users. This system allows users to manage their bank accounts, transfer funds, and track their transactions from their desktop environment.
+![Online Banking System](https://github.com/user-attachments/assets/cfab1891-d1b9-4b54-8f51-d9d3acec0900)
+
 
 ## Features
 
